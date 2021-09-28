@@ -20,14 +20,20 @@ public class LogicGridController : MonoBehaviour
         GridComponentPlug[] notAndAndGatePlugs = new GridComponentPlug[2] {
                     new GridComponentPlug(0, 0, CardinalDirection.NORTH, ComponentPlugType.OUTPUT, null),
                     new GridComponentPlug(0, 0, CardinalDirection.SOUTH, ComponentPlugType.INPUT, null) };
-        factory.RegisterLogicComponent(LogicComponentType.NOT, new Vector2Int(1, 1), new NotGate(), true, notAndAndGatePlugs, null);
 
-        LogicComponent notGate = factory.CreateLogicComponent(LogicComponentType.NOT, 1, 1, CardinalDirection.NORTH, false);
+        factory.RegisterLogicComponent(LogicComponentType.NOT, new Vector2Int(1, 1), new NotGate(), true, notAndAndGatePlugs, null);
+        LogicComponent notGate = factory.CreateLogicComponent(LogicComponentType.NOT, 7, 1, CardinalDirection.WEST, false);
         this.logicGrid.AddComponent(notGate);
+
+        factory.RegisterLogicComponent(LogicComponentType.BUFFER, new Vector2Int(1, 1), new BufferGate(), true, notAndAndGatePlugs, null);
+        this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.BUFFER, 5, 1, CardinalDirection.WEST, false));
+        this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.BUFFER, 2, 1, CardinalDirection.WEST, false));
+
         this.display();
 
         updateButton.onClick.AddListener(() =>
         {
+            this.logicGrid.UpdateGrid();
             foreach (Transform transform in this.transform)
             {
                 GameObject.Destroy(transform.gameObject);

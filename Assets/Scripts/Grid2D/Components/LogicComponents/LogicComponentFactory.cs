@@ -45,7 +45,7 @@ public class LogicComponentFactory
             logicComponentArea.height = priorWidth;
         }
 
-        return new LogicComponent(new RectInt(x, y, logicComponentArea.x, logicComponentArea.y), direction, flipped, type, gate, clear);
+        return new LogicComponent(logicComponentArea, direction, flipped, type, gate, clear);
     }
 
     private void AddPlugsToLogicComponent(LogicComponent component, CardinalDirection direction, bool flipped)
@@ -60,7 +60,6 @@ public class LogicComponentFactory
             // flip plug
             if (flipped)
             {
-
                 plug.GetBody().SetArea(Grid2DUtil.FlipOverVerticalAxis(plug.GetBody().GetArea(), component.GetBody().GetArea().width / 2f));
                 if (plug.GetBody().GetDirection() == CardinalDirection.EAST || plug.GetBody().GetDirection() == CardinalDirection.WEST)
                 {
@@ -71,7 +70,6 @@ public class LogicComponentFactory
             // rotate plug
             plug.GetBody().SetDirection(CardinalDirectionHelper.Rotate(plug.GetBody().GetDirection(), clockwiseSteps));
             plug.GetBody().SetArea(Grid2DUtil.RotateClockwiseInSameQuad(plug.GetBody().GetArea(), clockwiseSteps));
-            Debug.Log(plug.GetBody().GetArea() + " : " + plug.PlugType + " : " + plug.GetBody().GetDirection());
             component.AddPlug(plug.GetBody().GetArea().position, plug.GetBody().GetDirection(), plug.PlugType);
         }
     }

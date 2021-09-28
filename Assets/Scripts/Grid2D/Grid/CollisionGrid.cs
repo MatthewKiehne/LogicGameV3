@@ -38,13 +38,13 @@ public class CollisionGrid<T> : Grid2D<T> where T : GridComponent
 
     public bool canPlaceComponent(T component)
     {
-
         RectInt compArea = component.GetBody().GetArea();
+
         if (compArea.x >= 0 && compArea.x + compArea.width < this.GetWidth() && compArea.y >= 0 && compArea.y + compArea.height < this.GetHeight())
         {
-            T overlappedComponent = gridComponents.Find((T currenctComponent) =>
+            T overlappedComponent = gridComponents.Find((T currentComponent) =>
             {
-                return currenctComponent.GetBody().GetArea().Overlaps(component.GetBody().GetArea());
+                return currentComponent.GetBody().GetArea().Overlaps(component.GetBody().GetArea());
             });
 
             if (overlappedComponent == null)

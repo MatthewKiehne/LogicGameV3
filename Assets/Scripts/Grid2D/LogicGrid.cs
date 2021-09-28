@@ -39,7 +39,6 @@ public class LogicGrid
 
             foreach (GridComponentPlug plug in component.GetOutgoingPlugs())
             {
-                Debug.Log(plug);
                 CreatePlugConnection(component, plug);
             }
 
@@ -73,13 +72,14 @@ public class LogicGrid
                     if (this.isNewRectCloserThanCurrent(plug.GetBody().GetDirection(), closestLogicComponentCollision.GetBody().GetArea(), logicComp.GetBody().GetArea()))
                     {
                         closestLogicComponentCollision = logicComp;
+                        collisionRay = this.trimRay(plug.GetBody().GetDirection(), collisionRay, closestLogicComponentCollision.GetBody().GetArea());
                     }
                 }
-                else
+                else if (logicComp != component)
                 {
                     closestLogicComponentCollision = logicComp;
+                    collisionRay = this.trimRay(plug.GetBody().GetDirection(), collisionRay, closestLogicComponentCollision.GetBody().GetArea());
                 }
-                collisionRay = this.trimRay(plug.GetBody().GetDirection(), collisionRay, closestLogicComponentCollision.GetBody().GetArea());
             }
         }
         return collisionRay;
@@ -168,7 +168,7 @@ public class LogicGrid
             case (CardinalDirection.WEST):
                 return new RectInt(collisionBody.xMax, ray.y, ray.xMax - collisionBody.xMax, ray.height);
             default:
-                return new RectInt(0, 0, 0, 0);
+                throw new Exception("NotImplementedException: I am Lazy and will fix this later");
         }
     }
 
