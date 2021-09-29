@@ -26,6 +26,16 @@ public static class Grid2DUtil
         return new RectInt(Mathf.RoundToInt(worldRotatedPoint.x), Mathf.RoundToInt(worldRotatedPoint.y), rect.height, rect.width);
     }
 
+    public static RectInt RotateClockwise(RectInt rect, Vector2 pointToRotateAround, int turns)
+    {
+        RectInt result = rect;
+        for (int i = 0; i < turns; i++)
+        {
+            result = RotateClockwise(result, pointToRotateAround);
+        }
+        return result;
+    }
+
     public static RectInt RotateClockwiseInSameQuad(RectInt rect, int turns)
     {
         RectInt result = rect;

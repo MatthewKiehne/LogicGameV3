@@ -10,10 +10,10 @@ public class LogicComponentFactory
     private Dictionary<LogicComponentType, LogicGate> logicGate = new Dictionary<LogicComponentType, LogicGate>();
     private Dictionary<LogicComponentType, bool> clearAfterUpdate = new Dictionary<LogicComponentType, bool>();
     private Dictionary<LogicComponentType, GridComponentPlug[]> defaultPlugs = new Dictionary<LogicComponentType, GridComponentPlug[]>();
-    private Dictionary<LogicComponentType, Action<int>> onInputValueChange = new Dictionary<LogicComponentType, Action<int>>();
+    private Dictionary<LogicComponentType, LogicComponentAction> onInputValueChange = new Dictionary<LogicComponentType, LogicComponentAction>();
 
     public void RegisterLogicComponent(LogicComponentType type, Vector2Int dimension, LogicGate gate,
-        bool clearAfterUpdate, GridComponentPlug[] defaultPlugs, Action<int> onInputValueChange)
+        bool clearAfterUpdate, GridComponentPlug[] defaultPlugs, LogicComponentAction onInputValueChange)
     {
         this.dimensions.Add(type, dimension);
         this.logicGate.Add(type, gate);
@@ -69,19 +69,21 @@ public class LogicComponentFactory
 
             // rotate plug
             plug.GetBody().SetDirection(CardinalDirectionHelper.Rotate(plug.GetBody().GetDirection(), clockwiseSteps));
-            plug.GetBody().SetArea(Grid2DUtil.RotateClockwiseInSameQuad(plug.GetBody().GetArea(), clockwiseSteps));
+            Vector2 centerOfLogicComponent = new Vector2(component.GetBody().GetArea().width / 2f, component.GetBody().GetArea().height / 2f);
+            RectInt newPos = Grid2DUtil.RotateClockwise(plug.GetBody().GetArea(), centerOfLogicComponent, clockwiseSteps);
+            plug.GetBody().SetArea(newPos);
             component.AddPlug(plug.GetBody().GetArea().position, plug.GetBody().GetDirection(), plug.PlugType);
         }
     }
 
     private void AddOnValueChange(LogicComponent comp)
     {
-        Action<int> action = this.onInputValueChange[comp.GateType];
-        if (action != null)
+        LogicComponentAction logicAction = this.onInputValueChange[comp.GateType];
+        if (logicAction != null)
         {
             foreach (GridComponentPlug plug in comp.GetIncomingPlugs())
             {
-                plug.SubscribeOnValueChange(action);
+                plug.SubscribeOnValueChange(logicAction.onValueChange(comp));
             }
         }
     }

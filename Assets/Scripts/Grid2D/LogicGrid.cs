@@ -59,7 +59,8 @@ public class LogicGrid
 
     private RectInt createConnectionRay(GridComponentPlug plug, LogicComponent component)
     {
-        Vector2Int startingPoint = CardinalDirectionHelper.Move(plug.GetBody().GetDirection(), 1) + component.GetBody().GetArea().position;
+        Vector2Int startingPoint = CardinalDirectionHelper.Move(plug.GetBody().GetDirection(), 1);
+        startingPoint += component.GetBody().GetArea().position + plug.GetBody().GetArea().position;
         RectInt collisionRay = this.rayBoundByGrid(plug.GetBody().GetDirection(), startingPoint, component);
         LogicComponent closestLogicComponentCollision = null;
 
