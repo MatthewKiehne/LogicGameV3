@@ -6,9 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Camera))]
 
 public class CameraInteract : MonoBehaviour
-{
-
-    private Camera cam;
+{    private Camera cam;
 
     [SerializeField]
     private Text interactText;
