@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
+using TMPro;
 
 [RequireComponent(typeof(Camera))]
 
 public class CameraInteract : MonoBehaviour
-{    private Camera cam;
-
+{
+    private Camera cam;
+    //private Camera cam;
     [SerializeField]
-    private Text interactText;
+    private TMP_Text interactText;
+
 
     void Start()
     {
@@ -26,6 +30,13 @@ public class CameraInteract : MonoBehaviour
         if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Interact")
         {
             interactText.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                PlayerInteract interactable = hit.transform.gameObject.GetComponent<PlayerInteract>();
+                if(interactable != null) {
+                    interactable.interact();
+                }
+            }
         }
         else
         {

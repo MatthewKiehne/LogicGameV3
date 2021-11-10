@@ -40,7 +40,7 @@ public class CollisionGrid<T> : Grid2D<T> where T : GridComponent
     {
         RectInt compArea = component.GetBody().GetArea();
 
-        if (compArea.x >= 0 && compArea.x + compArea.width < this.GetWidth() && compArea.y >= 0 && compArea.y + compArea.height < this.GetHeight())
+        if (compArea.x >= 0 && compArea.x < this.GetWidth() && compArea.x + compArea.width <= this.GetWidth() && compArea.y >= 0 && compArea.y < this.GetHeight() && compArea.y + compArea.height <= this.GetHeight())
         {
             T overlappedComponent = gridComponents.Find((T currentComponent) =>
             {
