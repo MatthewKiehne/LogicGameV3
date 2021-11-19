@@ -27,7 +27,6 @@ public class CollisionGrid<T> : Grid2D<T> where T : GridComponent
     }
     public bool AddComponent(T component)
     {
-
         if (this.canPlaceComponent(component))
         {
             this.gridComponents.Add(component);
