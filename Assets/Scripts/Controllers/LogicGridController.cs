@@ -19,7 +19,7 @@ public class LogicGridController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.logicGrid = new LogicGrid(10, 10);
+        this.logicGrid = new LogicGrid(64, 64);
 
         LogicComponentFactory factory = new LogicComponentFactory();
         GridComponentPlug[] notAndAndGatePlugs = new GridComponentPlug[2] {
@@ -41,8 +41,6 @@ public class LogicGridController : MonoBehaviour
         this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.NOT, 9, 0, CardinalDirection.WEST, false));
 
         factory.RegisterLogicComponent(LogicComponentType.BUFFER, new Vector2Int(1, 1), new BufferGate(), true, notAndAndGatePlugs, null);
-        // this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.BUFFER, 5, 8, CardinalDirection.NORTH, false));
-        // this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.BUFFER, 2, 1, CardinalDirection.WEST, false));
 
         factory.RegisterLogicComponent(LogicComponentType.AND, new Vector2Int(2, 2), new AndGate(), true, twoWideComponents, null);
         this.logicGrid.AddComponent(factory.CreateLogicComponent(LogicComponentType.AND, 5, 0, CardinalDirection.WEST, false));
@@ -52,15 +50,7 @@ public class LogicGridController : MonoBehaviour
 
         this.display();
 
-        // updateButton.onClick.AddListener(() =>
-        // {
-        //     this.logicGrid.UpdateGrid();
-        //     foreach (Transform transform in this.transform)
-        //     {
-        //         GameObject.Destroy(transform.gameObject);
-        //     }
-        //     this.display();
-        // });
+
     }
 
     private void display()
@@ -91,7 +81,7 @@ public class LogicGridController : MonoBehaviour
             {
                 go.transform.localScale = new Vector3(go.transform.localScale.x, go.transform.localScale.y / 2f, .5f);
             }
-            
+
             Vector3 connectionScale = go.transform.localScale;
             connectionScale.z = connectionScale.z * zScale;
             go.transform.localScale = connectionScale * renderScale;
@@ -126,5 +116,18 @@ public class LogicGridController : MonoBehaviour
         logicPosition.y *= renderScale;
         logicPosition += gridOffset;
         return logicPosition;
+    }
+
+    public void updateGraph() {
+        Debug.Log("clicked");
+        updateButton.onClick.AddListener(() =>
+        {
+            this.logicGrid.UpdateGrid();
+            foreach (Transform transform in this.transform)
+            {
+                GameObject.Destroy(transform.gameObject);
+            }
+            this.display();
+        });
     }
 }
