@@ -102,7 +102,8 @@ public class LogicGridController : MonoBehaviour
         return new Vector3(vector.x, vector.y, 0);
     }
 
-    private Vector3 getGridPositions(GridBody  body) {
+    private Vector3 getGridPositions(GridBody body)
+    {
         float xScale = 1f / this.transform.lossyScale.x;
         float yScale = 1f / this.transform.lossyScale.y;
         float zScale = 1f / this.transform.lossyScale.z;
@@ -118,16 +119,14 @@ public class LogicGridController : MonoBehaviour
         return logicPosition;
     }
 
-    public void updateGraph() {
+    public void updateGraph()
+    {
         Debug.Log("clicked");
-        updateButton.onClick.AddListener(() =>
+        this.logicGrid.UpdateGrid();
+        foreach (Transform transform in this.transform)
         {
-            this.logicGrid.UpdateGrid();
-            foreach (Transform transform in this.transform)
-            {
-                GameObject.Destroy(transform.gameObject);
-            }
-            this.display();
-        });
+            GameObject.Destroy(transform.gameObject);
+        }
+        this.display();
     }
 }
