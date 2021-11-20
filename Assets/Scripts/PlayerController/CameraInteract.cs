@@ -30,16 +30,19 @@ public class CameraInteract : MonoBehaviour
                 this.interactText.text = interactController.HighlightText;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    interactController.CallMouseDown();
+                    interactController.CallMouseDown(hit);
                 }
-
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    interactController.CallMouseHeld();
+                    interactController.CallMouseHeld(hit);
                 }
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    interactController.CallMouseUp();
+                    interactController.CallMouseUp(hit);
+                }
+                if (!Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKeyUp(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Mouse0))
+                {
+                    interactController.CallMouseHover(hit);
                 }
             }
         }

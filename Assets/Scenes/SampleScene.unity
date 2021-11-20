@@ -398,6 +398,8 @@ GameObject:
   - component: {fileID: 143478199}
   - component: {fileID: 143478198}
   - component: {fileID: 143478197}
+  - component: {fileID: 143478202}
+  - component: {fileID: 143478201}
   m_Layer: 6
   m_Name: Logic Panel
   m_TagString: Interact
@@ -479,11 +481,62 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.54}
   m_LocalScale: {x: 2, y: 20.020018, z: 0.125}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 287969533}
+  m_Children: []
   m_Father: {fileID: 1509369875}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143478201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143478196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a209d7d9d50bf42bf86e21913d24b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MouseDown:
+    m_PersistentCalls:
+      m_Calls: []
+  MouseHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  MouseUp:
+    m_PersistentCalls:
+      m_Calls: []
+  MouseHover:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 143478202}
+        m_TargetAssemblyTypeName: LogicGridController, Assembly-CSharp
+        m_MethodName: OnPlayerHover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HighlightText: 
+--- !u!114 &143478202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143478196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2f03979f6629140aaedefc299d1152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displaySize: 1
+  cubePrefab: {fileID: 4570483205484109860, guid: 92681a6d015c9ec4e966ffa71f4b843c, type: 3}
+  updateButton: {fileID: 0}
 --- !u!1 &171388508
 GameObject:
   m_ObjectHideFlags: 3
@@ -682,53 +735,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272014491}
   m_CullTransparentMesh: 1
---- !u!1 &287969531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 287969533}
-  - component: {fileID: 287969532}
-  m_Layer: 0
-  m_Name: fun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &287969532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287969531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2f03979f6629140aaedefc299d1152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displaySize: 2
-  cubePrefab: {fileID: 4570483205484109860, guid: 92681a6d015c9ec4e966ffa71f4b843c, type: 3}
-  updateButton: {fileID: 0}
---- !u!4 &287969533
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287969531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 143478200}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327254491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,6 +1497,9 @@ MonoBehaviour:
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
+  MouseHover:
+    m_PersistentCalls:
+      m_Calls: []
   HighlightText: Update Graph
 --- !u!65 &835669766
 BoxCollider:
@@ -1718,6 +1727,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   MouseUp:
+    m_PersistentCalls:
+      m_Calls: []
+  MouseHover:
     m_PersistentCalls:
       m_Calls: []
   HighlightText: Update Graph
@@ -3235,7 +3247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065936944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.012000084, y: 0.39613265, z: -1}
+  m_LocalPosition: {x: -0.02, y: 0.414, z: -1}
   m_LocalScale: {x: 0.67626, y: 0.080959044, z: 1.263308}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3257,7 +3269,7 @@ MonoBehaviour:
   MouseDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 287969532}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LogicGridController, Assembly-CSharp
         m_MethodName: updateGraph
         m_Mode: 1
@@ -3273,6 +3285,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MouseUp:
+    m_PersistentCalls:
+      m_Calls: []
+  MouseHover:
     m_PersistentCalls:
       m_Calls: []
   HighlightText: Update Graph

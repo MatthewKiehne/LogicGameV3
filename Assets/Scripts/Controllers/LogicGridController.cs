@@ -19,7 +19,7 @@ public class LogicGridController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.logicGrid = new LogicGrid(64, 64);
+        this.logicGrid = new LogicGrid(32, 32);
 
         LogicComponentFactory factory = new LogicComponentFactory();
         GridComponentPlug[] notAndAndGatePlugs = new GridComponentPlug[2] {
@@ -66,6 +66,7 @@ public class LogicGridController : MonoBehaviour
             logicCube.transform.localPosition = getGridPositions(comp.GetBody());
             logicCube.transform.localScale = new Vector3(comp.GetBody().GetArea().width * xScale, comp.GetBody().GetArea().height * yScale, zScale) * renderScale;
             logicCube.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 1, 1);
+            Destroy(logicCube.GetComponent<BoxCollider>());
         }
 
         foreach (LogicConnection connection in logicGrid.GetLogicConnections())
@@ -94,6 +95,7 @@ public class LogicGridController : MonoBehaviour
             {
                 go.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, .2f);
             }
+            Destroy(go.GetComponent<BoxCollider>());
         }
     }
 
@@ -127,5 +129,13 @@ public class LogicGridController : MonoBehaviour
             GameObject.Destroy(transform.gameObject);
         }
         this.display();
+    }
+
+    public void OnPlayerHover(RaycastHit raycast)
+    {
+        Vector3 localVector = this.transform.InverseTransformPoint(raycast.point) + new Vector3(.5f, .5f, 0);
+        localVector.z = 0;
+        Vector3 worldGridPos = localVector * this.logicGrid.GetWidth();
+        Vector2 gridPos = new Vector2( Mathf.Floor(worldGridPos.x), Mathf.Floor(worldGridPos.y));
     }
 }
