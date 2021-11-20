@@ -121,7 +121,6 @@ public class LogicGridController : MonoBehaviour
 
     public void updateGraph()
     {
-        Debug.Log("clicked");
         this.logicGrid.UpdateGrid();
         foreach (Transform transform in this.transform)
         {
